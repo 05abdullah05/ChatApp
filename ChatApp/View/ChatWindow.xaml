@@ -1,0 +1,46 @@
+<Window x:Class="ChatApp.View.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chat" Height="450" Width="600">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- MESSAGE LIST -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Sender}"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Text}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- SEND INPUT -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+            <TextBox Text="{Binding OutgoingText, UpdateSourceTrigger=PropertyChanged}"
+             Width="350"
+             Height="28"
+             KeyDown="TextBox_KeyDown"/>
+
+            <Button Content="Send"
+            Command="{Binding SendCommand}"
+            Width="80"
+            Margin="10,0,0,0"/>
+
+            <Button Content="Buzz"
+            Command="{Binding BuzzCommand}"
+            Width="80"
+            Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
